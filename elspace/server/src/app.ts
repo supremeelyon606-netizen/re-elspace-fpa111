@@ -3,6 +3,10 @@ import cors from 'cors';
 import helmet from 'helmet';
 import 'express-async-errors';
 
+// Import routes
+import walletRoutes from './modules/wallet/wallet.routes';
+import adminRoutes from './modules/admin/admin.routes';
+
 const app = express();
 
 // Middleware
@@ -19,7 +23,9 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK' });
 });
 
-// Routes will be added here
+// API Routes
+app.use('/api/wallet', walletRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
